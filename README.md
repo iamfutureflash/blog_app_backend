@@ -1,2 +1,3 @@
-# blog_app_backend
-blog_app_backend created using node, express, mongoose, using mongodb as a database
+# blog_app_backend with iamfutureflash
+blog_app_backend created using node, express, mongoose, using MongoDB as a database
+ 
