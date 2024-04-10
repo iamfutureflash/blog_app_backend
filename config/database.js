@@ -1,14 +1,18 @@
-const { connect } = require('mongoose');
-require('dotenv').config();
-const DATABASE_URL = process.env.DATABASE_URL;
-const connectWithDb = () => {
-    connect(DATABASE_URL)
-        .then(() => { console.log(`DB Connected Successfully at ${DATABASE_URL}`); })
-        .catch((error) => {
-            console.log('DB Facing connection issue');
-            console.log(error);
+const mongoose = require('mongoose');
+require("dotenv").config();
+const connectWithDB = () => {
+    mongoose.connect(process.env.DATABASE_URL, {
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
+    })
+        .then(() => {
+            console.log('DB connected successfully');
+        })
+        .catch((e) => {
+            console.error('DB facing connection issue');
+            console.error(e);
             process.exit(1);
         })
 }
 
-module.exports = connectWithDb;
+module.exports = connectWithDB;

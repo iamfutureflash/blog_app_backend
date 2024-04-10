@@ -1,21 +1,22 @@
-// import model
+const Post = require("../model/postModel");
+const Comment = require("../model/commentModel");
 
-const Post = require("../models/postModel");
-const Comment = require("../models/commentModel");
-
-// business logic
-exports.createComment = async (req, res) => {
+exports.createComment = async (rq, rs) => {
     try {
-        const { post, user, body } = req.body;
-        const comment = new Comment({ post, user, body, });
+        const { post, user, body } = rq.body;
+        const comment = new Comment({ body, post, user });
         const savedComment = await comment.save();
-        const updatePost = await Post.findByIdAndUpdate(post, { $push: { comments: savedComment._id } }, { new: true }).populate('comments').populate('likes').exec();
-        res.send({
-            savedComment: savedComment,
-            post: updatePost,
-        })
+        const updatedPost = await Post.findByIdAndUpdate(post, { $push: { comments: savedComment._id } }, { new: true })
+            .populate("comments").exec();
+            rs.status(200).json({
+                post:updatedPost,
+            });
     }
     catch (e) {
-        return res.status(500).json({ error: `Error while creating comment ${e}`, })
+        rs.status(500).json({
+            error:"error while creating comment",
+        })
+        console.error(e);
+        process.exit(1);
     }
 }

@@ -1,11 +1,9 @@
-//import mongoose
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-// make route handler
 const likeSchema = new mongoose.Schema({
     post: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
+        ref: "Post",
     },
     user: {
         type: String,
@@ -13,5 +11,4 @@ const likeSchema = new mongoose.Schema({
     },
 })
 
-// export route handler
-module.exports = mongoose.model('Like', likeSchema);
+module.exports = mongoose.model("Like", likeSchema);
