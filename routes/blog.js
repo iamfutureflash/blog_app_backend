@@ -1,15 +1,15 @@
 const express = require('express');
-const { model } = require('mongoose');
-const { createComment } = require('../controllers/CommentController');
-const router = express.Router();
+const { createComment, createPosts, getAllPosts, likePost, unlike } = require('../controllers');
+
+const blogRouter = express.Router();
 
 // import controller  
 
-router.post('/comments/create', createComment)
-// router.get('/posts/create', () => { })
-// router.post('/posts/create', () => { })
-// router.post('/posts/create', () => { })
-// router.post('/posts/create', () => { })
-router.get('/dummyRoute', (req, res) => { res.send('this is dummy route') })
+blogRouter.post('/posts/create', createPosts);
+blogRouter.get('/posts', getAllPosts);
+blogRouter.post('/comments/create', createComment);
+blogRouter.post('/likes/like', likePost);
+blogRouter.post('/likes/unlike', unlike);
+blogRouter.get('/dummyRoute', (req, res) => { res.send('this is dummy route') });
 
-module.exports = router
+module.exports = blogRouter;

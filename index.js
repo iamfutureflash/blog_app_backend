@@ -1,6 +1,6 @@
 const express = require('express');
 const connectWithDB = require('./config/database');
-const blog = require("./routes/blog")
+const blogRouter = require('./routes/blog');
 require("dotenv").config();
 
 
@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
-app.use("/api/v1", blog);
+app.use("/api/v1", blogRouter);
 app.listen(PORT, () => {
     console.log(`app is started successfully at port ${PORT}`);
 })
